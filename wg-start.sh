@@ -68,6 +68,12 @@ done
 echo "$(date): Starting Internet redirection server"
 rinetd
 
+while :; do
+  echo "Reloading rinetd configuration file"
+  kill -HUP $(< /var/run/rinetd.pid)
+  sleep 60
+done &
+
 echo "$(date): Starting Wireguard"
 wg-quick up wg0
 
